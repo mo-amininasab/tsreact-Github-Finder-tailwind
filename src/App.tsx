@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+
+// cmp
+import Navbar from './components/layout/Navbar'
 
 interface Props {
   
@@ -6,9 +9,9 @@ interface Props {
 
 const App: React.FC<Props> = (props) => {
   return (
-    <div>
-      
-    </div>
+    <Fragment>
+      <Navbar />
+    </Fragment>
   )
 }
 
