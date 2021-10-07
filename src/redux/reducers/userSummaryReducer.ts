@@ -7,13 +7,13 @@ import {
 interface userSummaryState {
   loading: boolean;
   error: string | null;
-  data: UserSummaryJSONTypes[] | null;
+  data: UserSummaryJSONTypes[] | [];
 }
 
 const initialState: userSummaryState = {
   loading: false,
   error: null,
-  data: null,
+  data: [],
 };
 
 export default (
@@ -29,6 +29,9 @@ export default (
 
     case userSummaryConstants.GET_USERS_ERROR:
       return { ...state, loading: false, error: action.payload };
+
+    case userSummaryConstants.CLEAR_USERS:
+      return { ...state, loading: false, error: null, data: [] };
 
     default:
       return state;

@@ -1,4 +1,7 @@
-import { userSummaryConstants, UserSummaryJSONTypes } from '../constants/userSummaryConstants';
+import {
+  userSummaryConstants,
+  UserSummaryJSONTypes,
+} from '../constants/userSummaryConstants';
 
 interface GetUsersAction {
   type: userSummaryConstants.GET_USERS;
@@ -14,7 +17,12 @@ interface GetUsersActionError {
   payload: string;
 }
 
+interface ClearUsersAction {
+  type: userSummaryConstants.CLEAR_USERS;
+}
+
 export type userSummaryAction =
   | GetUsersAction
   | GetUsersActionSuccess
-  | GetUsersActionError;
+  | GetUsersActionError
+  | ClearUsersAction;

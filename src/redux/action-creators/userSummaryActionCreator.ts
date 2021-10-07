@@ -20,3 +20,7 @@ export const getUserSummaries =
       dispatch({ type: userSummaryConstants.GET_USERS_ERROR, payload: error });
     }
   };
+
+export const clearUserSummaries = () => {
+  return { type: userSummaryConstants.CLEAR_USERS };
+};

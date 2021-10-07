@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { userSummaryActionCreators } from '../../redux';
 
 interface Props {}
@@ -7,6 +8,9 @@ interface Props {}
 const Search: React.FC<Props> = (props) => {
   const [term, setTerm] = useState<string>('');
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const { data } = useTypedSelector((state) => state.userSummary);
   const dispatch = useDispatch();
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,6 +20,13 @@ const Search: React.FC<Props> = (props) => {
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(userSummaryActionCreators.getUserSummaries(term));
+  };
+
+  const onClearHandler = () => {
+    dispatch(userSummaryActionCreators.clearUserSummaries());
+    setTerm('');
+
+    inputRef.current?.focus();
   };
 
   return (
@@ -28,6 +39,8 @@ const Search: React.FC<Props> = (props) => {
           className="border border-black py-1 px-2 rounded-sm"
           value={term}
           onChange={onChangeHandler}
+          autoFocus
+          ref={inputRef}
         />
         <button
           type="submit"
@@ -36,7 +49,14 @@ const Search: React.FC<Props> = (props) => {
           Search
         </button>
       </form>
-      <button className="bg-light py-1 px-2 rounded-sm">Clear</button>
+      {data.length > 0 && (
+        <button
+          onClick={onClearHandler}
+          className="bg-light py-1 px-2 rounded-sm"
+        >
+          Clear
+        </button>
+      )}
     </div>
   );
 };

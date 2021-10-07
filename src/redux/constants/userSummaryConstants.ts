@@ -2,7 +2,7 @@ export enum userSummaryConstants {
   GET_USERS = 'GET_USERS',
   GET_USERS_SUCCESS = 'GET_USERS_SUCCESS',
   GET_USERS_ERROR = 'GET_USERS_ERROR',
-
+  CLEAR_USERS = 'CLEAR_USERS',
 }
 
 
