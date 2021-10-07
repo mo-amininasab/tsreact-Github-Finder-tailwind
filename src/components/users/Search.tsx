@@ -31,7 +31,7 @@ const Search: React.FC<Props> = (props) => {
         />
         <button
           type="submit"
-          className="bg-dark text-white py-1 px-2 rounded-sm"
+          className="bg-dark text-white py-1 px-2 rounded-sm hover:opacity-90"
         >
           Search
         </button>
