@@ -25,4 +25,4 @@ export type userSummaryAction =
   | GetUsersAction
   | GetUsersActionSuccess
   | GetUsersActionError
-  | ClearUsersAction;
+  | ClearUsersAction

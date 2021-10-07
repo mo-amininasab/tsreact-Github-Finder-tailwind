@@ -1,14 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// cmp
+import Spinner from '../layout/Spinner';
+
 // redux
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 interface Props {}
 
 const Users: React.FC<Props> = (props) => {
-  const users = useTypedSelector((state) => state.userSummary.data);
+  const { data: users, loading } = useTypedSelector(
+    (state) => state.userSummary
+  );
 
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <div className="grid grid-cols-3 mt-6 gap-4">
       {users?.map((user) => (

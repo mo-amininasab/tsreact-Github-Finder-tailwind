@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { userSummaryActionCreators } from '../../redux';
+import { alertActionCreators, userSummaryActionCreators } from '../../redux';
 
 interface Props {}
 
@@ -11,6 +11,7 @@ const Search: React.FC<Props> = (props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { data } = useTypedSelector((state) => state.userSummary);
+  const { alertType, message } = useTypedSelector((state) => state.alert);
   const dispatch = useDispatch();
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +20,18 @@ const Search: React.FC<Props> = (props) => {
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(userSummaryActionCreators.getUserSummaries(term));
+
+    if (term.trim().length > 0) {
+      dispatch(userSummaryActionCreators.getUserSummaries(term));
+    } else {
+      dispatch(
+        alertActionCreators.showAlert('Please enter something.', 'WARNING')
+      );
+
+      setTimeout(() => {
+        dispatch(alertActionCreators.removeAlert());
+      }, 3000);
+    }
   };
 
   const onClearHandler = () => {
@@ -31,6 +43,12 @@ const Search: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col space-y-4">
+      {message.length > 0 && (
+        <div className="flex items-center bg-light text-dark px-2 py-4 rounded-sm">
+          <i className="fas fa-info-circle mr-2" />
+          <h1>{message}</h1>
+        </div>
+      )}
       <form onSubmit={onSubmitHandler} className="flex flex-col space-y-4">
         <input
           type="text"
