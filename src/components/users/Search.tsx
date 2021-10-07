@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { alertActionCreators, userSummaryActionCreators } from '../../redux';
+import Alert from '../layout/Alert';
 
 interface Props {}
 
@@ -43,12 +44,7 @@ const Search: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col space-y-4">
-      {message.length > 0 && (
-        <div className="flex items-center bg-light text-dark px-2 py-4 rounded-sm">
-          <i className="fas fa-info-circle mr-2" />
-          <h1>{message}</h1>
-        </div>
-      )}
+      {message.length > 0 && <Alert message="Please enter something." />}
       <form onSubmit={onSubmitHandler} className="flex flex-col space-y-4">
         <input
           type="text"
