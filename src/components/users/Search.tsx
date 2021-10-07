@@ -67,7 +67,7 @@ const Search: React.FC<Props> = (props) => {
           Search
         </button>
       </form>
-      {data.length > 0 && (
+      {'total_count' in data && data.total_count > 0 && (
         <button
           onClick={onClearHandler}
           className="bg-light py-1 px-2 rounded-sm"

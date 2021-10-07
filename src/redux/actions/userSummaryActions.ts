@@ -9,7 +9,7 @@ interface GetUsersAction {
 
 interface GetUsersActionSuccess {
   type: userSummaryConstants.GET_USERS_SUCCESS;
-  payload: UserSummaryJSONTypes[];
+  payload: UserSummaryJSONTypes;
 }
 
 interface GetUsersActionError {

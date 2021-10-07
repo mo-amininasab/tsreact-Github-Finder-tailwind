@@ -11,9 +11,9 @@ export const getUserSummaries =
     dispatch({ type: userSummaryConstants.GET_USERS });
 
     try {
-      const { data }: { data: UserSummaryJSONTypes[] } = await axios.get(
-        `https://api.github.com/users`
-      );
+      const { data }: { data: UserSummaryJSONTypes } = await axios.get(
+        `https://api.github.com/search/users?q=${term}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+        );
 
       dispatch({ type: userSummaryConstants.GET_USERS_SUCCESS, payload: data });
     } catch (error: any) {
